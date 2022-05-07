@@ -32,3 +32,5 @@ app.get('/', (req, res) => {
 app.listen(port, ()=>{
     console.log("Listening to port", port)
 });
+// // DB_USER = bookUser
+// DB_PASS = Ll05QW3FbMYtYEOv
