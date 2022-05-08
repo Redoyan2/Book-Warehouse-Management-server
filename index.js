@@ -14,13 +14,26 @@ app.use(express.json());
 // mongo database 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.ntcev.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
-client.connect(err => {
-  const collection = client.db("test").collection("devices");
-  console.log('books management DB connected');
-  // perform actions on the collection object
-  client.close();
-});
 
+
+async function run(){
+  try{
+    await client.connect();
+    const bookCollection = client.db('book-management').collection('books-list');
+    
+    app.get('/book', async(req, res)=>{
+      const query = {};
+     const cursor = bookCollection.find(query);
+     const books = await cursor.toArray();
+     res.send(books);
+    } )
+
+  }
+  finally{
+
+  }
+}
+run().catch(console.dir);
 
 
 
