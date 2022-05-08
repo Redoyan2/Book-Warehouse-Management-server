@@ -33,6 +33,12 @@ async function run(){
       const book = await bookCollection.findOne(query);
       res.send(book);
     })
+    //post data
+    app.post('/book', async(req,res)=>{
+      const newBook = req.body;
+       const insertBook = await bookCollection.insertOne(newBook);
+       res.send(insertBook);
+    })
 
   }
   finally{
