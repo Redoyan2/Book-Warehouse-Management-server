@@ -39,6 +39,13 @@ async function run(){
        const insertBook = await bookCollection.insertOne(newBook);
        res.send(insertBook);
     })
+    // delete api
+    app.delete('/book/:id', async(req, res)=>{
+      const id = req.params.id;
+      const query = {_id: ObjectId(id)};
+      const deleteItem = await bookCollection.deleteOne(query);
+      res.send(deleteItem);
+    });
 
   }
   finally{
